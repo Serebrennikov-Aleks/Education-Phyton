@@ -13,7 +13,10 @@
 def my_decorator(function):
 	def the_original_function():
 		return function()
-	the_original_function.__doc__ = "I'm was here!:)"
+	if format(function.__doc__) == 'None':
+		the_original_function.__doc__ = "I'm was here!:)"
+	else:
+		the_original_function.__doc__ = function.__doc__ + "I'm was here!:)"
 	return the_original_function
 
 @my_decorator
@@ -21,7 +24,7 @@ def func():
 	return 42
  
 #func()
-#help(func)
+help(func)
 
 # 2.Написать декоратор который cчитает время выполнения функции.
 

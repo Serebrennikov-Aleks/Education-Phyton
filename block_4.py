@@ -69,10 +69,6 @@ def my_chain(*karg):
 		for obj in iterator:
 			yield obj
 
-i1 = iter([1, 2, 3])
-i2 = iter([4, 5])
-i3 = iter([6, 7, 8])
-c = my_chain(i1, i2, i3)
 
 if __name__ == "__main__":
 	import doctest

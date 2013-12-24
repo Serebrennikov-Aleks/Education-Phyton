@@ -3,7 +3,7 @@ dir(obj)
 
 # 2.Как получить список всех публичных атрибутов объекта
 for str in dir(obj):
-	if not str.startwith('__') and not str.endswith('__'):
+	if not str.startswith('__') and not str.endswith('__'):
 		print str
 
 # 3.Как получить список методов объекта

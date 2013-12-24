@@ -131,3 +131,54 @@ class Reg:
 	def __init__(self):
 		self._example.append(self)
 
+if __name__ == '__main__':
+	#1
+	x = X(foo=1, bar=5, _bazz=12, name='Amok', props=('One', 'two'))
+	print x.foo
+	print x.bar
+	print x._bazz
+	print x.name
+	print x.props
+	print x
+	#2
+	x = DictAttr([('one', 1), ('two', 2), ('three', 3)])
+	print x['one']
+	print x['two']
+	print x['three']
+	print x.one
+	print x.two
+	print x.three
+	#print x.five
+	print x.get('one')
+	print x.get('two')
+	print x.get('three')
+	#print x.get('five')
+	print x.get('five', 'missing')
+	#3
+	x = Xstep3([('one', 1), ('two', 2), ('three', 3)])
+	print x['one']
+	print x['two']
+	print x['three']
+	print x.one
+	print x.two
+	print x.three
+	#print x.five
+	print x.get('one')
+	print x.get('two')
+	print x.get('three')
+	#print x.get('five')
+	print x.get('five', 'missing')
+	print x.bar
+	print x['foo']
+	print x.get('foo', 'missing')
+	print x.get('bzz', 'missing')
+	#4
+	x = Reg()
+	print x
+	y = Reg()
+	print y
+	z = Reg()
+	print z
+	#print type(Test.__iter__)
+	for i in Reg:
+		print i

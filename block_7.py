@@ -67,8 +67,10 @@ class ImageBase(object):
 
 # 3.Реализовать базовый класс (используя метакласс) и дескрипторы, которые бы на основе класса создавали SQL-схему (ANSI SQL) для модели:
 class Integer(object):
+	def __init__(self, value = None):
+		self.__value = value
 	def __get__(self, obj, objtype):
-		return 'integer'
+		return self.__value
 
 class Str(object):
 	def __init__(self,limit):

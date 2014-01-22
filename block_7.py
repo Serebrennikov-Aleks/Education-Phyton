@@ -79,19 +79,31 @@ class Str(object):
 		return 'varchar(%d)' % self.limit
 
 class TableMetaclassSQL(type):
-	def __new__(cls, name, bases, attrs):
-		def sql():
-			stringResult = 'CREATE TABLE %s (' % name.lower() + '\n '
-			listAttrs = []
-			for key, val in attrs.iteritems():
-				if isinstance(attrs[key], Integer):
-					listAttrs.append(key + ' integer')
-				elif isinstance(attrs[key], Str):
-					listAttrs.append(key + ' varchar(%s)' % attrs[key].limit)
-			stringResult += ',\n '.join(listAttrs) + ',\n)'
-			return stringResult
-		attrs['sql'] = sql()
-		return type.__new__(cls, name, bases, attrs)
+	#def __new__(cls, name, bases, attrs):
+	#	def sql():
+	#		stringResult = 'CREATE TABLE %s (' % name.lower() + '\n '
+	#		listAttrs = []
+	#		for key, val in attrs.iteritems():
+	#			if isinstance(attrs[key], Integer):
+	#				listAttrs.append(key + ' integer')
+	#			elif isinstance(attrs[key], Str):
+	#				listAttrs.append(key + ' varchar(%s)' % attrs[key].limit)
+	#		stringResult += ',\n '.join(listAttrs) + ',\n)'
+	#		return stringResult
+	#	attrs['sql'] = sql()
+	#	return type.__new__(cls, name, bases, attrs)
+	
+	def sql(cls):
+		stringResult = 'CREATE TABLE %s (' % cls.__name__.lower() + '\n '
+		listAttrs = []
+		attrs = cls.__dict__
+		for key, val in attrs.iteritems():
+			if isinstance(attrs[key], Integer):
+				listAttrs.append(key + ' integer')
+			elif isinstance(attrs[key], Str):
+				listAttrs.append(key + ' varchar(%s)' % attrs[key].limit)
+		stringResult += ',\n '.join(listAttrs) + ',\n)'
+		return stringResult
 
 class Table(object):
 	__metaclass__ = TableMetaclassSQL
@@ -110,4 +122,4 @@ if __name__ == '__main__':
 	img.path = 'test'
 	print img.path
 	#img.size = 'test'
-	print ImageStep3.sql
+	print ImageStep3.sql()
